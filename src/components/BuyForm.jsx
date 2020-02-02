@@ -15,30 +15,50 @@ const inputsStyle = {
 
 }
 
-function BuyForm() {
+function BuyForm({ handleSubmit,
+  name,
+  handleName,
+  amount,
+  handleAmount,
+  handleSelect,
+  buyType,
+}) {
 
     const { Option } = Select;
-    
     return (
-      <form  style={formStyle} className="FormContainer"> 
-
+      <form  onSubmit={handleSubmit} style={formStyle} className="FormContainer"> 
         <div style={inputsStyle}>
           <Select
             showSearch
             style={{ width: 100 }}
             placeholder="분류 선택"
             optionFilterProp="children"
+            name="buyType"
+            value={buyType}
+            onChange={handleSelect}
             filterOption={(input, option) =>
               option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
             }
           >
-            <Option value="식비">식비</Option>
-            <Option value="주거비">주거비</Option>
+            <Option value={0}>식비</Option>
+            <Option value={1}>주거비</Option>
           </Select>
-          <Input style={{ width: 300 }} placeholder="사용 내역" />
-          <Input style={{ width: 150 }} prefix="₩" suffix="원" />
+          <Input 
+            name="name" 
+            style={{ width: 300 }} 
+            placeholder="사용 내역" 
+            value={name}
+            onChange={handleName}
+          />
+          <Input 
+            name="amount" 
+            style={{ width: 150, textAlign:'right' }}
+            prefix="₩" suffix="원" 
+            value={amount}
+            onChange={handleAmount}            
+          />
         </div>
-        <Button type="primary" shape="round" htmlType="submit" size={10}>
+        <Button type="primary" shape="round" htmlType="submit">
           입력하기
         </Button>
       </form>

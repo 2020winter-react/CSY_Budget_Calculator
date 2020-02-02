@@ -13,14 +13,20 @@ const formStyle = {
   
   }
 
-function BudgetForm() {
+function BudgetForm({state, dispatch}) {
     return (
         <form  style={formStyle} className="FormContainer"> 
 
         <div style={inputsStyle}>
           
           <h3>목표 예산: </h3>
-          <Input style={{ width: 350, marginLeft: 20 }} prefix="₩" suffix="원" />
+          <Input 
+            style={{ width: 350, marginLeft: 20, textAlign: 'right'}} 
+            prefix="₩" 
+            suffix="원" 
+            value={state}
+            onChange={(e)=>dispatch({type:'CHANGE_BUDGET', payload:e.target.value})}
+          />
         </div>
       </form>
     )
